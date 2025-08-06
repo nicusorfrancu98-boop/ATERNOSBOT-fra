@@ -1,0 +1,30 @@
+// index.js
+import fetch from 'node-fetch';
+
+const PING_URL = 'http://StoneXHeartSMP.aternos.me:54266'; //
+
+function getRandomInterval(minMinutes, maxMinutes) {
+  const min = minMinutes * 60 * 1000;
+  const max = maxMinutes * 60 * 1000;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+async function pingServer() {
+  try {
+    const response = await fetch(PING_URL);
+    if (response.ok) {
+      console.log(`Serverul a răspuns cu status ${response.status} la ${new Date().toLocaleTimeString()}`);
+    } else {
+      console.log(`Serverul a răspuns cu status neașteptat: ${response.status} la ${new Date().toLocaleTimeString()}`);
+    }
+  } catch (error) {
+    console.log('Eroare la ping:', error.message);
+  }
+
+  const nextInterval = getRandomInterval(3, 7);
+  console.log(`Următorul ping peste ${Math.round(nextInterval / 60000)} minute.`);
+  setTimeout(pingServer, nextInterval);
+}
+
+//
+pingServer();

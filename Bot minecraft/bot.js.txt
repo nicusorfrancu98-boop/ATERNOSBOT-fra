@@ -1,0 +1,20 @@
+const mineflayer = require('mineflayer');
+
+const bot = mineflayer.createBot({
+  host: 'IP-SERVER.aternos.me', // înlocuiește cu IP-ul serverului tău
+  port: 25565,                  // portul standard, schimbă dacă e altul
+  username: 'NumeBot',          // numele botului
+  version: '1.21.4'             // versiunea serverului Minecraft
+});
+
+bot.on('login', () => {
+  console.log('Bot conectat cu succes!');
+});
+
+bot.on('end', () => {
+  console.log('Botul a fost deconectat.');
+});
+
+bot.on('error', (err) => {
+  console.log('Eroare:', err);
+});
